@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Users } from './users';
 import { Context } from 'radweb';
 import { RunOnServer } from 'radweb';
-  
+
 import { DialogService } from '../common/dialog';
 import { Roles } from './roles';
 
@@ -23,13 +23,17 @@ export class UsersComponent implements OnInit {
     allowDelete: true,
     allowInsert: true,
     allowUpdate: true,
-    numOfColumnsInGrid: 2,
+    numOfColumnsInGrid: 5,
     get: {
       orderBy: h => [h.name],
       limit: 100
     },
     columnSettings: users => [
-      users.name
+      users.name,
+      users.phone,
+      users.admin,
+      users.weeklyFamilyVolunteer,
+      users.weeklyFamilyPacker
 
 
     ],

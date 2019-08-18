@@ -1,11 +1,7 @@
 <mat-card>
   <data-grid2 [settings]="users" height="300"></data-grid2>
-  <div class="col-md-12" *ngIf="users.currentRow">
-    <div *ngIf="isAdmin()">
-      <mat-checkbox [(ngModel)]="users.currentRow.admin.value">{{users.currentRow.admin.caption}}</mat-checkbox>
-    </div>
-  </div>
+  
   <button mat-raised-button color="warn" (click)="resetPassword()" *ngIf="users.currentRow">
-    Rest password for {{users.currentRow.name.value}}
+    אתחלי סיסמה עבור  {{users.currentRow.name.value}}
   </button>
 </mat-card>

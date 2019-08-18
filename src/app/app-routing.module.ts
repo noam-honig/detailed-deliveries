@@ -1,4 +1,4 @@
-import { RadWebModule, NotSignedInGuard } from 'radweb';
+import { RadWebModule, NotSignedInGuard, SignedInGuard } from 'radweb';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Route, ActivatedRouteSnapshot } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -11,11 +11,11 @@ import { Roles, AdminGuard } from './users/roles';
 
 
 const routes: Routes = [
-  { path: 'Home', component: HomeComponent },
-  { path: 'User Accounts', component: UsersComponent, canActivate: [AdminGuard] },
+  { path: 'Home', component: HomeComponent,data: { name: 'דף הבית' } },
+  { path: 'User Accounts', component: UsersComponent, canActivate: [AdminGuard] ,data: { name: 'מתנדבות' }},
 
-  { path: 'Register', component: RegisterComponent, canActivate: [NotSignedInGuard] },
-  { path: 'Account Info', component: UpdateInfoComponent, canActivate: [NotSignedInGuard] },
+  
+  { path: 'Account Info', component: UpdateInfoComponent, canActivate: [SignedInGuard] ,data: { name: 'עדכון פרטים' }},
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   { path: '**', redirectTo: '/Home', pathMatch: 'full' }
 

@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
     if (this.canceling)
       return;
     if (!this.user || this.user.length < 2 || !(await this.authService.setToken(await ServerSignIn.signIn(this.user, this.password)))) {
-      this.dialog.YesNoQuestion("Invalid sign in information");
+      this.dialog.YesNoQuestion("טלפון או סיסמה שגויה");
     }
     else
       this.dialogRef.close();

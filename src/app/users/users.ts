@@ -16,6 +16,7 @@ export class Users extends IdEntity<UserId>  {
 
         super(new UserId(context), {
             name: "Users",
+            dbName: () => 'helpers',
             allowApiRead: true,
             allowApiDelete: context.isSignedIn(),
             allowApiUpdate: context.isSignedIn(),
@@ -43,25 +44,35 @@ export class Users extends IdEntity<UserId>  {
     }
     public static emptyPassword = 'password';
     name = new radweb.StringColumn({
-        caption: "name",
+        caption: "שם",
         onValidate: () => {
 
             if (!this.name.value || this.name.value.length < 2)
                 this.name.error = 'Name is too short';
         }
     });
+   
+  
+    phone = new StringColumn({ caption: "טלפון", inputType: 'tel' });
 
     realStoredPassword = new StringColumn({
         dbName: 'password',
         includeInApi: false
     });
-    password = new radweb.StringColumn({ caption: 'password', inputType: 'password', virtualData: () => this.realStoredPassword.value ? Users.emptyPassword : '' });
+    password = new radweb.StringColumn({ caption: 'סיסמה', inputType: 'password', virtualData: () => this.realStoredPassword.value ? Users.emptyPassword : '' });
 
-    createDate = new changeDate('Create Date');
+    createDate = new changeDate('תאריך יצירה');
 
-
-
-    admin = new BoolColumn();
+    admin = new BoolColumn({
+        dbName: 'weeklyFamilyAdmin',
+        caption: 'מנהלת משלוחים שבועיים'
+    });
+    weeklyFamilyPacker = new BoolColumn({
+        caption: 'אורזת משלוחים שבועיים'
+    });
+    weeklyFamilyVolunteer = new BoolColumn({
+        caption: 'מתנדבת משלוחים שבועיים'
+    });
     static passwordHelper: PasswordHelper = {
         generateHash: x => { throw ""; },
         verify: (x, y) => { throw ""; }

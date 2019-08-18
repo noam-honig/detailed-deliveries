@@ -1,5 +1,5 @@
 {
-  "name": "radweb-starterkit",
+  "name": "detailed-deliveries",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,7 +11,7 @@
     "server:build": "tsc -p tsconfig.server.json",
     "server:build-watch": "tsc -p tsconfig.server.json --watch",
     "server:execute": "node dist-server/server/server.js",
-    "server:debug": "node --inspect --debug-brk dist-server/radweb-starterkit/src/app/server/server.js",
+    "server:debug": "node --inspect --debug-brk dist-server/detailed-deliveries/src/app/server/server.js",
     "RunSomething": "node --inspect --debug-brk dist-server/server/doSomething.js",
     "test": "ng test",
     "lint": "ng lint",
