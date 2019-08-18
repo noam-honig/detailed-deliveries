@@ -5,13 +5,13 @@
   <mat-dialog-actions>
 
     <button mat-raised-button color="warning" (click)="close()" *ngIf="data.onYes">
-      No
+      לא
     </button>
     <button mat-raised-button color="primary" (click)="close()" *ngIf="!data.onYes">
-      Confirm
+      אשר
     </button>
     <button mat-raised-button color="primary"  (click)="select()" *ngIf="data.onYes">
-      Yes
+      כן
     </button>
   </mat-dialog-actions>
 

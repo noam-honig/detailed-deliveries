@@ -1,9 +1,10 @@
 import * as radweb from 'radweb';
-import { ColumnSetting, Entity, IdEntity, IdColumn, checkForDuplicateValue, StringColumn, BoolColumn, ColumnOptions } from "radweb";
+import { ColumnSetting, Entity, IdEntity, IdColumn, checkForDuplicateValue, StringColumn, BoolColumn, ColumnOptions, FilterBase } from "radweb";
 import { changeDate } from '../shared/types';
 import { DataColumnSettings } from 'radweb';
 import { Context, EntityClass } from 'radweb';
 import { Roles } from './roles';
+import { DialogService } from '../common/dialog';
 
 
 
@@ -48,11 +49,11 @@ export class Users extends IdEntity<UserId>  {
         onValidate: () => {
 
             if (!this.name.value || this.name.value.length < 2)
-                this.name.error = 'Name is too short';
+                this.name.error = 'שם מתנדבת קצר מידי';
         }
     });
-   
-  
+
+
     phone = new StringColumn({ caption: "טלפון", inputType: 'tel' });
 
     realStoredPassword = new StringColumn({
@@ -65,13 +66,16 @@ export class Users extends IdEntity<UserId>  {
 
     admin = new BoolColumn({
         dbName: 'weeklyFamilyAdmin',
-        caption: 'מנהלת משלוחים שבועיים'
+        caption: 'מנהלת'
     });
-    weeklyFamilyPacker = new BoolColumn({
-        caption: 'אורזת משלוחים שבועיים'
+    packer = new BoolColumn({
+        caption: 'אורזת',
+        dbName: 'weeklyFamilyPacker'
+
     });
-    weeklyFamilyVolunteer = new BoolColumn({
-        caption: 'מתנדבת משלוחים שבועיים'
+    volunteer = new BoolColumn({
+        caption: 'מתנדבת',
+        dbName: 'weeklyFamilyVolunteer'
     });
     static passwordHelper: PasswordHelper = {
         generateHash: x => { throw ""; },
@@ -90,12 +94,19 @@ export class UserId extends IdColumn {
     constructor(private context: Context, settingsOrCaption?: ColumnOptions<string>) {
         super(settingsOrCaption);
     }
-    getColumn(): ColumnSetting<Entity<any>> {
+    getColumn(dialog: DialogService, filter?: (helper: Users) => FilterBase): ColumnSetting<Entity<any>> {
         return {
             column: this,
+
             getValue: f => (f ? ((f).__getColumn(this)) : this).displayValue,
+            click: f => {
+                dialog.showPopup(Users, s => (f ? f.__getColumn(this) : this).value = (s ? s.id.value : ''), {
+                    columnSettings: u => [u.name],
+                    get: { where: u => filter(u) }
+                })
+            },
             hideDataOnInput: true,
-            readonly: this.context.isAllowed(this.allowApiUpdate),
+            readonly: !this.context.isAllowed(this.allowApiUpdate),
             width: '200'
 
         }

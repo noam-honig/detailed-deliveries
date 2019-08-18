@@ -12,7 +12,7 @@ import { SelectComponentInfo, SelectPopupComponent } from './select-popup/select
 @Injectable()
 export class DialogService {
     Info(info: string): any {
-        this.snackBar.open(info, "close", { duration: 4000 });
+        this.snackBar.open(info, "סגור", { duration: 4000 });
     }
     Error(err: string): any {
 
@@ -57,6 +57,6 @@ export class DialogService {
         this.dialog.open(YesNoQuestionComponent, { data });
     }
     confirmDelete(of: string, onOk: () => void) {
-        this.YesNoQuestion("Are you sure you would like to delete " + of + "?", onOk);
+        this.YesNoQuestion("האם את בטוחה שאת מעוניינת למחוק את  " + of + "?", onOk);
     }
 }

@@ -27,3 +27,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   direction: rtl;
 }
 //end rtl stuff
+
+.family-title{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+  margin-left:10px;
+}

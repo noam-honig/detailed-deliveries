@@ -1,5 +1,6 @@
-<h1 mat-dialog-title>Sign in</h1>
-<form class="example-form" (submit)="signIn()">
+
+<h1 mat-dialog-title>כניסה לסל של מיכל</h1>
+<form class="example-form" (submit)="signIn()" >
   <div mat-dialog-content>
     <mat-form-field>
       <input matInput placeholder="מספר טלפון" [(ngModel)]="user" type="tel" [ngModelOptions]="{standalone: true}">
@@ -9,8 +10,9 @@
       <input matInput placeholder="סיסמה" [(ngModel)]="password" type="password" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
   </div>
+  <mat-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="remember">זכור אותי במכשיר זה</mat-checkbox>
   <div mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit">כניסה</button>
-    <button mat-raised-button (click)="cancel()">ביטול</button>
+    
   </div>
 </form>

@@ -32,8 +32,8 @@ export class UsersComponent implements OnInit {
       users.name,
       users.phone,
       users.admin,
-      users.weeklyFamilyVolunteer,
-      users.weeklyFamilyPacker
+      users.volunteer,
+      users.packer
 
 
     ],
@@ -44,9 +44,9 @@ export class UsersComponent implements OnInit {
 
 
   resetPassword() {
-    this.dialog.YesNoQuestion("Are you sure you want to delete the password of " + this.users.currentRow.name.value, async () => {
+    this.dialog.YesNoQuestion("האם את בטוחה שאת רוצה למחוק את הסיסמה של " + this.users.currentRow.name.value, async () => {
       await UsersComponent.resetPassword(this.users.currentRow.id.value);
-      this.dialog.Info("Password deleted");
+      this.dialog.Info("סיסמה נמחקה, אנא בקשי מהמתנדבת להגדיר סיסמה חדשה במסך עדכון פרטים");
     });
 
   }

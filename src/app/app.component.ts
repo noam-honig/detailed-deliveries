@@ -1,5 +1,6 @@
+
 import { Component, Injector, ViewChild } from '@angular/core';
-import { Router, Route, CanActivate, ActivatedRoute } from '@angular/router';
+import { Router, Route, ActivatedRoute } from '@angular/router';
 import { MatSidenav } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -35,13 +36,13 @@ export class AppComponent {
   signInText() {
     if (this.context.user)
       return this.context.user.name;
-    return 'Sign in';
+    return 'כניסה';
   }
   signIn() {
     if (!this.context.user) {
       this.dialog.open(SignInComponent);
     } else {
-      this.dialogService.YesNoQuestion("Would you like to sign out?", () => { this.sessionManager.signout() });
+      this.dialogService.YesNoQuestion("האם ברצונך לצאת מהמערכת?", () => { this.sessionManager.signout() });
     }
   }
 
@@ -61,7 +62,7 @@ export class AppComponent {
         if (this.activeRoute.firstChild.routeConfig)
           return this.activeRoute.firstChild.routeConfig.path;
       }
-    return 'radweb starter kit';
+    return 'הסל של מיכל';
   }
 
 
@@ -69,6 +70,8 @@ export class AppComponent {
 
     this.routeClicked();
     this.sessionManager.signout();
+    this.routeHelper.navigateToComponent(SignInComponent);
+    
   }
   shouldDisplayRoute(route: Route) {
     if (!(route.path && route.path.indexOf(':') < 0 && route.path.indexOf('**') < 0))

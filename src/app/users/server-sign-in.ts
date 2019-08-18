@@ -16,8 +16,11 @@ export class ServerSignIn {
                     name: h.name.value
                 };
                 if (h.admin.value) {
-                    result.roles.push(Roles.admin);
-                }
+                    result.roles.push(Roles.admin, Roles.volunteer, Roles.packer);
+                } else if (h.volunteer.value)
+                    result.roles.push(Roles.volunteer);
+                if (h.packer)
+                    result.roles.push(Roles.packer);
             }
         });
         if (result) {

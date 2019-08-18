@@ -1,23 +1,33 @@
-import { RadWebModule, NotSignedInGuard, SignedInGuard } from 'radweb';
+import { RadWebModule, SignedInGuard } from 'radweb';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Route, ActivatedRouteSnapshot } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { Routes, RouterModule } from '@angular/router';
 
-import { RegisterComponent } from './users/register/register.component';
+
+
 import { UpdateInfoComponent } from './users/update-info/update-info.component';
 
 import { UsersComponent } from './users/users.component';
-import { Roles, AdminGuard } from './users/roles';
+import {  AdminGuard, VolunteerGuard, PackerGuard } from './users/roles';
+import { ProductsComponent } from './products/products.component';
+import { MyWeeklyFamilyDeliveriesComponent } from './my-weekly-family-deliveries/my-weekly-family-deliveries.component';
+import { WeeklyPackerByFamilyComponent } from './weekly-packer-by-family/weekly-packer-by-family.component';
+import { WeeklyPackerByProductComponent } from './weekly-packer-by-product/weekly-packer-by-product.component';
+import { MyWeeklyFamiliesComponent } from './my-weekly-families/my-weekly-families.component';
+import { SignInComponent } from './common/sign-in/sign-in.component';
 
 
 const routes: Routes = [
-  { path: 'Home', component: HomeComponent,data: { name: 'דף הבית' } },
-  { path: 'User Accounts', component: UsersComponent, canActivate: [AdminGuard] ,data: { name: 'מתנדבות' }},
-
   
-  { path: 'Account Info', component: UpdateInfoComponent, canActivate: [SignedInGuard] ,data: { name: 'עדכון פרטים' }},
-  { path: '', redirectTo: '/Home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/Home', pathMatch: 'full' }
+  { path: 'my-weekly-families', component: MyWeeklyFamiliesComponent, data: { name: 'משפחות' }, canActivate: [VolunteerGuard] },
+  { path: 'products', component: ProductsComponent, canActivate: [AdminGuard], data: { name: 'מוצרים' } },
+  { path: 'User Accounts', component: UsersComponent, canActivate: [AdminGuard], data: { name: 'מתנדבות' } },
+  { path: 'my-weekly-families-deliveries', component: MyWeeklyFamilyDeliveriesComponent, data: { name: 'סלים' }, canActivate: [VolunteerGuard] },
+  { path: 'weekly-packer-by-family', component: WeeklyPackerByFamilyComponent, data: { name: 'אריזה לפי חבילות' }, canActivate: [PackerGuard] },
+  { path: 'weekly-packer-by-product', component: WeeklyPackerByProductComponent, data: { name: 'אריזה לפי מוצרים' }, canActivate: [PackerGuard] },
+  { path: 'Account Info', component: UpdateInfoComponent, canActivate: [SignedInGuard], data: { name: 'עדכון פרטים' } },
+  { path: 'login', component: SignInComponent, data: { name: 'כניסה' } },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 
 ];
 
@@ -28,3 +38,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
+SignedInGuard.componentToNavigateIfNotAllowed = SignInComponent;
