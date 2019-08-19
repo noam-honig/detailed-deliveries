@@ -26,8 +26,8 @@ const routes: Routes = [
   { path: 'weekly-packer-by-product', component: WeeklyPackerByProductComponent, data: { name: 'אריזה לפי מוצרים' }, canActivate: [PackerGuard] },
   { path: 'Account Info', component: UpdateInfoComponent, canActivate: [SignedInGuard], data: { name: 'עדכון פרטים' } },
   { path: 'login', component: SignInComponent, data: { name: 'כניסה' } },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/my-weekly-families', pathMatch: 'full' },
+  { path: '**', redirectTo: '/my-weekly-families', pathMatch: 'full' }
 
 ];
 
