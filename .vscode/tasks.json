@@ -60,6 +60,13 @@
             "type": "npm",
             "script": "publish-to-heroku-test",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "ng-serve",
+            "problemMatcher": [
+                "$tsc"
+            ]
         }
     ]
 }
